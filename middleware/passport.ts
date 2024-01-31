@@ -35,7 +35,12 @@ export const configureGoogleStrategy = () => {
             email: profile?.emails[0]?.value,
           })
 
-          if (existingUser) {
+          if (existingUser && existingUser.currentNorwegianSkill) {
+            // redirect to dashboard
+            console.log('Existing user', existingUser)
+            return done(null, existingUser)
+          } else if (existingUser && !existingUser.currentNorwegianSkill) {
+            // redirect to register
             console.log('Existing user', existingUser)
             return done(null, existingUser)
           }
@@ -49,6 +54,7 @@ export const configureGoogleStrategy = () => {
           await newUser.save()
           console.log('New user', newUser)
           return done(null, newUser)
+          // redirect to the register
         } catch (err: any) {
           console.error(err)
           return done(err, false)

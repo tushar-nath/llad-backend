@@ -4,13 +4,13 @@ import { IAccount, NorwegianSkillLevel } from '../types'
 const accountSchema = new Schema<IAccount>(
   {
     id: Number,
-    name: String,
+    name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    password: String,
+    password: { type: String, required: false, unique: true },
+    accessToken: { type: String, required: false, unique: true },
     currentNorwegianSkill: {
       type: String,
       enum: Object.values(NorwegianSkillLevel),
-      default: NorwegianSkillLevel.Beginner,
     },
   },
   {

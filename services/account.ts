@@ -7,8 +7,7 @@ export class AccountService {
   static async signup(
     name: string,
     email: string,
-    password: string,
-    currentNorwegianSkill: string
+    password: string
   ): Promise<IAccount> {
     try {
       await clientPromise
@@ -21,7 +20,6 @@ export class AccountService {
         name,
         email,
         password: hashedPassword,
-        currentNorwegianSkill,
       }
       const newUser = new Account(userData)
       const savedUser = await newUser.save()
@@ -35,16 +33,34 @@ export class AccountService {
   static async login(email: string, password: string): Promise<IAccount> {
     try {
       await clientPromise
-      const checkUser = await Account.findOne({ email: email })
+      const checkUser: any = await Account.findOne({ email: email })
       if (checkUser === null) {
         throw new Error('User does not exist')
       }
-      const match = await bcrypt.compare(password, checkUser.password)
+      const match: any = bcrypt.compare(password, checkUser.password)
       if (match) {
         return checkUser
       } else {
         throw new Error('Incorrect password')
       }
+    } catch (error: any) {
+      console.error('Error: ', error)
+      throw error
+    }
+  }
+
+  static async updateNorwegianLevel(
+    id: string,
+    level: number
+  ): Promise<IAccount | null> {
+    try {
+      await clientPromise
+      const updatedUser = await Account.findByIdAndUpdate(
+        id,
+        { currentNorwegianSkill: level },
+        { new: true }
+      )
+      return updatedUser
     } catch (error: any) {
       console.error('Error: ', error)
       throw error

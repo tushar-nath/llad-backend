@@ -5,6 +5,9 @@ export interface IAccount {
   password?: string
   currentNorwegianSkill?: NorwegianSkillLevel
   accessToken?: string
+  createdAt: Date
+  updatedAt: Date
+  __v: number
   remove: () => Promise<IAccount>
 }
 

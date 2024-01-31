@@ -12,6 +12,9 @@ const accountSchema = new Schema<IAccount>(
       type: String,
       enum: Object.values(NorwegianSkillLevel),
     },
+    createdAt: Date,
+    updatedAt: Date,
+    __v: { type: Number, select: false },
   },
   {
     timestamps: true,

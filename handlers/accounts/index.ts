@@ -6,7 +6,10 @@ export class Accounts {
     try {
       const { email, password, name } = req.body
       const user = await AccountService.signup(name, email, password)
-      res.status(200).json({ user })
+      const {
+        _doc: { password: _, createdAt, updatedAt, __v, ...userPayload },
+      } = user as any
+      res.status(200).json({ user: userPayload })
     } catch (error: any) {
       console.log('error is', error)
       res.status(400).json({ error: error.message })
@@ -17,7 +20,10 @@ export class Accounts {
     try {
       const { email, password } = req.body
       const user = await AccountService.login(email, password)
-      res.status(200).json({ user })
+      const {
+        _doc: { password: _, createdAt, updatedAt, __v, ...userPayload },
+      } = user as any
+      res.status(200).json({ user: userPayload })
     } catch (error: any) {
       console.log('error is', error)
       res.status(400).json({ error: error.message })

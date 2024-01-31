@@ -1,19 +1,19 @@
-import app from ".";
-import dotenv from "dotenv";
+import app from '.'
+import dotenv from 'dotenv'
 
-dotenv.config();
+dotenv.config()
 
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3000
 
 app.listen(PORT, () => {
-  console.log(`Server is listening on http://localhost:${PORT}`);
-});
+  console.log(`Server is listening on http://localhost:${PORT}`)
+})
 
-process.on("SIGTERM", close);
-process.on("SIGINT", close);
+process.on('SIGTERM', close)
+process.on('SIGINT', close)
 
 function close() {
-  console.log("Shutting down gracefully");
+  console.log('Shutting down gracefully')
 
-  process.exit(0);
+  process.exit(0)
 }

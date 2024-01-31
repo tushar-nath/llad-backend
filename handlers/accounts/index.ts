@@ -4,8 +4,13 @@ import { AccountService } from '../../services/account'
 export class Accounts {
   static async signup(req: Request, res: Response): Promise<void> {
     try {
-      const { email, password, username } = req.body
-      const user = await AccountService.signup(email, password, username)
+      const { email, password, name, currentNorwegianSkill } = req.body
+      const user = await AccountService.signup(
+        name,
+        email,
+        password,
+        currentNorwegianSkill
+      )
       res.status(200).json({ user })
     } catch (error: any) {
       console.log('error is', error)

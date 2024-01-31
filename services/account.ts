@@ -5,9 +5,10 @@ import { IAccount } from '../types'
 
 export class AccountService {
   static async signup(
+    name: string,
     email: string,
     password: string,
-    username: string
+    currentNorwegianSkill: string
   ): Promise<IAccount> {
     try {
       await clientPromise
@@ -17,9 +18,10 @@ export class AccountService {
       }
       const hashedPassword = await bcrypt.hash(password, 10)
       const userData = {
+        name,
         email,
         password: hashedPassword,
-        username,
+        currentNorwegianSkill,
       }
       const newUser = new Account(userData)
       const savedUser = await newUser.save()

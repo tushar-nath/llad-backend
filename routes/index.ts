@@ -18,11 +18,25 @@ v1Router.get(
   passport.authenticate('google', { scope: ['profile', 'email'] })
 )
 
-// Google OAuth callback
 v1Router.get(
   '/auth/google/callback',
   passport.authenticate('google', { failureRedirect: '/' }),
-  (_req, res) => {
+  (req: any, res) => {
+    if (req.user) {
+      const userData = req.user
+      // Convert user data to JSON string
+      const userDataString = JSON.stringify(userData)
+      // Encode the user data string
+      const encodedData = encodeURIComponent(userDataString)
+
+      if (req.user.currentNorwegianSkill) {
+        return res.redirect(`${process.env.CLIENT_URL}/?user=${encodedData}`)
+      } else {
+        return res.redirect(
+          `${process.env.CLIENT_URL}/register?user=${encodedData}`
+        )
+      }
+    }
     res.redirect('/')
   }
 )

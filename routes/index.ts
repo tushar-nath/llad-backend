@@ -8,3 +8,4 @@ v1Router.get('/healthcheck', (_req: Request, res: Response) => {
 })
 
 v1Router.post('/signup', Accounts.signup)
+v1Router.post('/login', Accounts.login)

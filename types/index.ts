@@ -16,3 +16,26 @@ export enum NorwegianSkillLevel {
   Intermediate = 'intermediate',
   Advanced = 'advanced',
 }
+
+export interface ICardFront {
+  text: string
+  example: string
+}
+
+export interface ICardBack {
+  text: string
+  example: string
+}
+
+export interface ICard {
+  id: number
+  userId: IAccount
+  front: ICardFront
+  back: ICardBack
+  note: string
+  tags: string[]
+  createdAt: Date
+  updatedAt: Date
+  __v: number
+  remove: () => Promise<ICard>
+}

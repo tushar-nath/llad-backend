@@ -40,4 +40,40 @@ export class CardService {
       throw error
     }
   }
+
+  static async updateCard(
+    cardId: string,
+    userId: string,
+    frontText: string,
+    frontExample: string,
+    backText: string,
+    backExample: string,
+    note: string,
+    tags: string[]
+  ): Promise<ICard | null> {
+    try {
+      await clientPromise
+      const card = await Card.findById(cardId)
+      if (!card) {
+        throw new Error('Card not found')
+      }
+      if (card.userId.toString() !== userId) {
+        throw new Error('You are not authorized to update this card')
+      }
+      const updatedCard = await Card.findByIdAndUpdate(
+        cardId,
+        {
+          front: { text: frontText, example: frontExample },
+          back: { text: backText, example: backExample },
+          note,
+          tags,
+        },
+        { new: true }
+      )
+      return updatedCard
+    } catch (error: any) {
+      console.error('Error: ', error)
+      throw error
+    }
+  }
 }

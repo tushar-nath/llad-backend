@@ -41,4 +41,33 @@ export class Cards {
       res.status(400).json({ error: error.message })
     }
   }
+
+  static async updateCard(req: Request, res: Response) {
+    try {
+      const {
+        cardId,
+        userId,
+        frontText,
+        frontExample,
+        backText,
+        backExample,
+        note,
+        tags,
+      } = req.body
+      const card = await CardService.updateCard(
+        cardId,
+        userId,
+        frontText,
+        frontExample,
+        backText,
+        backExample,
+        note,
+        tags
+      )
+      res.status(200).json({ card })
+    } catch (error: any) {
+      console.log('error is', error)
+      res.status(400).json({ error: error.message })
+    }
+  }
 }

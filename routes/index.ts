@@ -47,4 +47,5 @@ v1Router.get(
 
 /*** Card Routes ***/
 v1Router.post('/create-card', Cards.createCard)
+v1Router.get('/get-cards/:userId', Cards.getCards)
 /*** Card Routes ***/

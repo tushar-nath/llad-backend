@@ -28,4 +28,17 @@ export class Cards {
       res.status(400).json({ error: error.message })
     }
   }
+
+  static async getCards(req: Request, res: Response) {
+    try {
+      console.log('its here')
+      const { userId } = req.params
+      console.log('userId', userId)
+      const cards = await CardService.getCards(userId)
+      res.status(200).json({ cards })
+    } catch (error: any) {
+      console.log('error is', error)
+      res.status(400).json({ error: error.message })
+    }
+  }
 }

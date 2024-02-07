@@ -29,4 +29,15 @@ export class CardService {
       throw error
     }
   }
+
+  static async getCards(userId: string): Promise<ICard[]> {
+    try {
+      await clientPromise
+      const cards = await Card.find({ userId })
+      return cards
+    } catch (error: any) {
+      console.error('Error: ', error)
+      throw error
+    }
+  }
 }

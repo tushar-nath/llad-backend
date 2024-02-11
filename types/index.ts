@@ -3,6 +3,7 @@ export interface IAccount {
   name: string
   email: string
   password?: string
+  profilePicture?: string
   currentNorwegianSkill?: NorwegianSkillLevel
   accessToken?: string
   resetToken?: string

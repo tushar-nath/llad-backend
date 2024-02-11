@@ -8,6 +8,7 @@ const accountSchema = new Schema<IAccount>(
     email: { type: String, required: true, unique: true },
     password: { type: String, required: false, unique: true },
     accessToken: { type: String, required: false, unique: true },
+    profilePicture: { type: String, required: false },
     currentNorwegianSkill: {
       type: String,
       enum: Object.values(NorwegianSkillLevel),

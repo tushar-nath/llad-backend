@@ -49,6 +49,7 @@ export const configureGoogleStrategy = () => {
             email: profile?.emails[0].value,
             accessToken: accessToken,
             name: profile?.displayName,
+            profilePicture: profile?.photos[0]?.value,
           })
 
           await newUser.save()

@@ -49,4 +49,5 @@ v1Router.get(
 v1Router.post('/create-card', Cards.createCard)
 v1Router.get('/get-cards/:userId', Cards.getCards)
 v1Router.patch('/update-card', Cards.updateCard)
+v1Router.put('/revision', Cards.practiseCard)
 /*** Card Routes ***/

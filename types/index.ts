@@ -34,6 +34,10 @@ export interface ICard {
   back: ICardBack
   note: string
   tags: string[]
+  interval: number
+  repetition: number
+  efactor: number
+  dueDate: Date
   createdAt: Date
   updatedAt: Date
   __v: number

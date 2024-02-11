@@ -1,6 +1,9 @@
+import { supermemo } from 'supermemo'
 import clientPromise from '../lib/mongo'
 import { Card } from '../models/card'
 import { ICard } from '../types'
+import { SuperMemoGrade } from 'supermemo'
+import dayjs from 'dayjs'
 
 export class CardService {
   static async create(
@@ -71,6 +74,36 @@ export class CardService {
         { new: true }
       )
       return updatedCard
+    } catch (error: any) {
+      console.error('Error: ', error)
+      throw error
+    }
+  }
+
+  static async practiseCard(cardId: string, userId: string, grade: number) {
+    try {
+      await clientPromise
+      const card = await Card.findById(cardId)
+      if (!card) {
+        throw new Error('Card not found')
+      }
+      if (card.userId.toString() !== userId) {
+        throw new Error('You are not authorized to update this card')
+      }
+
+      const { interval, repetition, efactor } = supermemo(
+        card,
+        grade as SuperMemoGrade
+      )
+      const dueDate = dayjs().add(interval, 'day').toDate()
+
+      card.interval = interval
+      card.repetition = repetition
+      card.efactor = efactor
+      card.dueDate = dueDate
+
+      await card.save()
+      return card
     } catch (error: any) {
       console.error('Error: ', error)
       throw error

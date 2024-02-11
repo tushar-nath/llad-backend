@@ -10,6 +10,25 @@ const cardSchema = new mongoose.Schema<ICard>(
     back: { type: Object, required: true },
     note: { type: String, required: false },
     tags: { type: [String], required: false },
+    interval: {
+      type: Number,
+      default: 0,
+      required: true,
+    },
+    repetition: {
+      type: Number,
+      default: 0,
+      required: true,
+    },
+    efactor: {
+      type: Number,
+      default: 2.5,
+      required: true,
+    },
+    dueDate: {
+      type: Date,
+      required: false,
+    },
     createdAt: Date,
     updatedAt: Date,
     __v: { type: Number, select: false },

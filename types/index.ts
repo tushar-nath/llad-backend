@@ -5,6 +5,8 @@ export interface IAccount {
   password?: string
   currentNorwegianSkill?: NorwegianSkillLevel
   accessToken?: string
+  resetToken?: string
+  resetExpire?: Date
   createdAt: Date
   updatedAt: Date
   __v: number

@@ -14,6 +14,8 @@ v1Router.get('/healthcheck', (_req, res) => {
 /*** Authentication Routes ***/
 v1Router.post('/signup', Accounts.signup)
 v1Router.post('/login', Accounts.login)
+v1Router.post('/forgot-password', Accounts.forgotPassword)
+v1Router.post('/reset-password', Accounts.resetPassword)
 v1Router.post('/updateNorwegianLevel', Accounts.updateNorwegeinLevel)
 
 v1Router.get(

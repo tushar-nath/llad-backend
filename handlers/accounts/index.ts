@@ -43,4 +43,35 @@ export class Accounts {
       res.status(400).json({ error: error.message })
     }
   }
+
+  static async forgotPassword(req: Request, res: Response) {
+    try {
+      const { email } = req.body
+      await AccountService.forgotPassword(email)
+      res.status(200).json({ message: 'Reset link sent to your email' })
+    } catch (error: any) {
+      console.log('error is', error)
+      res.status(400).json({ error: error.message })
+    }
+  }
+
+  static async resetPassword(req: Request, res: Response) {
+    try {
+      const { token, newPassword } = req.body
+
+      // Verify the token in the database
+      const user = await AccountService.verifyResetPasswordToken(token)
+
+      // If the token is valid, update the user's password
+      if (user) {
+        await AccountService.updatePassword(user.email, newPassword)
+        res.status(200).json({ message: 'Password reset successfully.' })
+      } else {
+        res.status(400).json({ error: 'Invalid or expired token.' })
+      }
+    } catch (error: any) {
+      console.log('error is', error)
+      res.status(400).json({ error: error.message })
+    }
+  }
 }

@@ -12,6 +12,8 @@ const accountSchema = new Schema<IAccount>(
       type: String,
       enum: Object.values(NorwegianSkillLevel),
     },
+    resetToken: { type: String, required: false },
+    resetExpire: { type: Date, required: false },
     createdAt: Date,
     updatedAt: Date,
     __v: { type: Number, select: false },

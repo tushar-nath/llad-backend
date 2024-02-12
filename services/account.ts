@@ -75,7 +75,7 @@ export class AccountService {
       await MailService.sendMail({
         recipient: email,
         subject: 'Reset your password',
-        url: `${process.env.CLIENT_URL}/reset-password/${token}`,
+        url: `${process.env.CLIENT_URL}/reset-password?${token}`,
       })
       await Account.findOneAndUpdate(
         { email: email },

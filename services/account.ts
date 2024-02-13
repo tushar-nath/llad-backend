@@ -3,6 +3,7 @@ import bcrypt from 'bcryptjs'
 import clientPromise from '../lib/mongo'
 import { IAccount } from '../types'
 import { MailService } from './third-party/mail'
+import { Card } from '../models/card'
 
 export class AccountService {
   static async signup(
@@ -114,6 +115,25 @@ export class AccountService {
         { password: hashedPassword, resetToken: null, resetExpire: null }
       )
       return
+    } catch (error: any) {
+      console.error('Error: ', error)
+      throw error
+    }
+  }
+
+  static async getTags(userId: string) {
+    try {
+      await clientPromise
+      const cards = await Card.find({ userId: userId })
+      const tags: string[] = []
+      cards.forEach((card: any) => {
+        card.tags.forEach((tag: any) => {
+          if (!tags.includes(tag)) {
+            tags.push(tag)
+          }
+        })
+      })
+      return tags
     } catch (error: any) {
       console.error('Error: ', error)
       throw error

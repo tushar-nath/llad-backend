@@ -2,6 +2,7 @@ import passport from 'passport'
 import { Strategy as GoogleStrategy } from 'passport-google-oauth20'
 import express from 'express'
 import { Account } from '../models/account'
+import { MailService } from '../services/third-party/mail'
 
 // Middleware to check if the user is authenticated
 export const isAuthenticated = (
@@ -54,6 +55,8 @@ export const configureGoogleStrategy = () => {
 
           await newUser.save()
           console.log('New user', newUser)
+
+          await MailService.sendWelcomeMail({ recipient: newUser.email })
           return done(null, newUser)
           // redirect to the register
         } catch (err: any) {

@@ -1,5 +1,6 @@
 import { Request, Response } from 'express'
 import { AccountService } from '../../services/account'
+import { MailService } from '../../services/third-party/mail'
 
 export class Accounts {
   static async signup(req: Request, res: Response) {
@@ -9,6 +10,7 @@ export class Accounts {
       const {
         _doc: { password: _, createdAt, updatedAt, __v, ...userPayload },
       } = user as any
+      await MailService.sendWelcomeMail({ recipient: email })
       res.status(200).json({ user: userPayload })
     } catch (error: any) {
       console.log('error is', error)

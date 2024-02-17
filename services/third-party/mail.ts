@@ -28,4 +28,22 @@ export class MailService {
       throw new Error('There was an error sending the email')
     }
   }
+
+  static async sendWelcomeMail({
+    recipient,
+  }: {
+    recipient: string
+  }): Promise<void> {
+    try {
+      const msg: MailDataRequired = {
+        to: recipient,
+        from: process.env.SENDER_EMAIL as string,
+        templateId: process.env.SENDGRID_WELCOME_TEMPLATE_ID as string,
+      }
+      await sgMail.send(msg)
+    } catch (error) {
+      console.log(error)
+      throw new Error('There was an error sending the email')
+    }
+  }
 }

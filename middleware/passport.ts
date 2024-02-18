@@ -49,6 +49,7 @@ export const configureGoogleStrategy = () => {
           const newUser = new Account({
             email: profile?.emails[0].value,
             accessToken: accessToken,
+            googleId: profile?.id,
             name: profile?.displayName,
             profilePicture: profile?.photos[0]?.value,
           })

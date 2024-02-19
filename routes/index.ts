@@ -18,6 +18,7 @@ v1Router.post('/forgot-password', Accounts.forgotPassword)
 v1Router.post('/reset-password', Accounts.resetPassword)
 v1Router.post('/updateNorwegianLevel', Accounts.updateNorwegeinLevel)
 v1Router.get('/get-tags/:userId', Accounts.getTags)
+v1Router.post('/update-account-details', Accounts.updateAccountDetails)
 
 v1Router.get(
   '/auth/google',
@@ -53,4 +54,5 @@ v1Router.post('/create-card', Cards.createCard)
 v1Router.get('/get-cards/:userId', Cards.getCards)
 v1Router.patch('/update-card', Cards.updateCard)
 v1Router.put('/revision', Cards.practiseCard)
+v1Router.post('/star-card', Cards.starCard)
 /*** Card Routes ***/

@@ -53,6 +53,7 @@ export class Cards {
         backExample,
         note,
         tags,
+        isStarred,
       } = req.body
       const card = await CardService.updateCard(
         cardId,
@@ -62,7 +63,8 @@ export class Cards {
         backText,
         backExample,
         note,
-        tags
+        tags,
+        isStarred
       )
       res.status(200).json({ card })
     } catch (error: any) {
@@ -75,6 +77,17 @@ export class Cards {
     try {
       const { cardId, userId, grade } = req.body
       const card = await CardService.practiseCard(cardId, userId, grade)
+      res.status(200).json({ card })
+    } catch (error: any) {
+      console.log('error is', error)
+      res.status(400).json({ error: error.message })
+    }
+  }
+
+  static async starCard(req: Request, res: Response) {
+    try {
+      const { cardId, userId, isStarred } = req.body
+      const card = await CardService.starCard(cardId, userId, isStarred)
       res.status(200).json({ card })
     } catch (error: any) {
       console.log('error is', error)

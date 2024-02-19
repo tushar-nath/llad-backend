@@ -10,6 +10,7 @@ const cardSchema = new mongoose.Schema<ICard>(
     back: { type: Object, required: true },
     note: { type: String, required: false },
     tags: { type: [String], required: false },
+    isStarred: { type: Boolean, default: false },
     interval: {
       type: Number,
       default: 0,

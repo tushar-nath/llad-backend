@@ -6,6 +6,9 @@ export interface IAccount {
   password?: string
   profilePicture?: string
   currentNorwegianSkill?: NorwegianSkillLevel
+  about?: string
+  nativeLanguage?: string
+  phoneNumber?: number
   accessToken?: string
   resetToken?: string
   resetExpire?: Date
@@ -38,6 +41,7 @@ export interface ICard {
   back: ICardBack
   note: string
   tags: string[]
+  isStarred: boolean
   interval: number
   repetition: number
   efactor: number

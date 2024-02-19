@@ -139,4 +139,25 @@ export class AccountService {
       throw error
     }
   }
+
+  static async updateAccountDetails(
+    userId: string,
+    name: string,
+    email: string,
+    phoneNumber: number,
+    about: string
+  ) {
+    try {
+      await clientPromise
+      const updatedUser = await Account.findByIdAndUpdate(
+        userId,
+        { name, email, phoneNumber, about },
+        { new: true }
+      )
+      return updatedUser
+    } catch (error: any) {
+      console.error('Error: ', error)
+      throw error
+    }
+  }
 }

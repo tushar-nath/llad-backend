@@ -87,4 +87,21 @@ export class Accounts {
       res.status(400).json({ error: error.message })
     }
   }
+
+  static async updateAccountDetails(req: Request, res: Response) {
+    try {
+      const { userId, name, email, phoneNumber, about } = req.body
+      const user = await AccountService.updateAccountDetails(
+        userId,
+        name,
+        email,
+        phoneNumber,
+        about
+      )
+      res.status(200).json({ user })
+    } catch (error: any) {
+      console.log('error is', error)
+      res.status(400).json({ error: error.message })
+    }
+  }
 }

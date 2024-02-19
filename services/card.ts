@@ -52,7 +52,8 @@ export class CardService {
     backText: string,
     backExample: string,
     note: string,
-    tags: string[]
+    tags: string[],
+    isStarred: boolean
   ): Promise<ICard | null> {
     try {
       await clientPromise
@@ -70,6 +71,7 @@ export class CardService {
           back: { text: backText, example: backExample },
           note,
           tags,
+          isStarred,
         },
         { new: true }
       )
@@ -102,6 +104,25 @@ export class CardService {
       card.efactor = efactor
       card.dueDate = dueDate
 
+      await card.save()
+      return card
+    } catch (error: any) {
+      console.error('Error: ', error)
+      throw error
+    }
+  }
+
+  static async starCard(userId: string, cardId: string, isStarred: boolean) {
+    try {
+      await clientPromise
+      const card = await Card.findById(cardId)
+      if (!card) {
+        throw new Error('Card not found')
+      }
+      if (card.userId.toString() !== userId) {
+        throw new Error('You are not authorized to update this card')
+      }
+      card.isStarred = isStarred
       await card.save()
       return card
     } catch (error: any) {

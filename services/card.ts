@@ -112,7 +112,7 @@ export class CardService {
     }
   }
 
-  static async starCard(userId: string, cardId: string, isStarred: boolean) {
+  static async starCard(cardId: string, userId: string, isStarred: boolean) {
     try {
       await clientPromise
       const card = await Card.findById(cardId)

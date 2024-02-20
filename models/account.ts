@@ -6,9 +6,9 @@ const accountSchema = new Schema<IAccount>(
     id: Number,
     name: { type: String, required: true },
     email: { type: String, required: true, unique: true },
-    googleId: { type: String, required: false, unique: true },
+    googleId: { type: String, required: false, unique: true, sparse: true },
     password: { type: String, required: false, unique: true },
-    accessToken: { type: String, required: false, unique: true },
+    accessToken: { type: String, required: false, unique: true, sparse: true },
     profilePicture: { type: String, required: false },
     currentNorwegianSkill: {
       type: String,

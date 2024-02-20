@@ -19,6 +19,7 @@ v1Router.post('/reset-password', Accounts.resetPassword)
 v1Router.post('/updateNorwegianLevel', Accounts.updateNorwegeinLevel)
 v1Router.get('/get-tags/:userId', Accounts.getTags)
 v1Router.post('/update-account-details', Accounts.updateAccountDetails)
+v1Router.patch('/update-profile-picture', Accounts.updateProfilePicture)
 
 v1Router.get(
   '/auth/google',

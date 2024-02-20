@@ -4,7 +4,7 @@ export interface IAccount {
   email: string
   googleId?: string
   password?: string
-  profilePicture?: string
+  profilePicture?: any
   currentNorwegianSkill?: NorwegianSkillLevel
   about?: string
   nativeLanguage?: string

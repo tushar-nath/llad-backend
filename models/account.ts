@@ -9,7 +9,7 @@ const accountSchema = new Schema<IAccount>(
     googleId: { type: String, required: false, unique: true, sparse: true },
     password: { type: String, required: false, unique: true },
     accessToken: { type: String, required: false, unique: true, sparse: true },
-    profilePicture: { type: String, required: false },
+    profilePicture: { type: String || Buffer, required: false },
     currentNorwegianSkill: {
       type: String,
       enum: Object.values(NorwegianSkillLevel),

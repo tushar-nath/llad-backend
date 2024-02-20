@@ -160,4 +160,20 @@ export class AccountService {
       throw error
     }
   }
+
+  static async updateProfilePicture(userId: string, profilePicture: any) {
+    try {
+      await clientPromise
+      const pictureBuffer = Buffer.from(profilePicture, 'base64')
+      const updatedUser = await Account.findByIdAndUpdate(
+        userId,
+        { profilePicture: pictureBuffer },
+        { new: true }
+      )
+      return updatedUser
+    } catch (error: any) {
+      console.error('Error: ', error)
+      throw error
+    }
+  }
 }

@@ -97,7 +97,9 @@ export class AccountService {
         resetExpire: { $gt: Date.now() },
       })
       if (!user) {
-        throw new Error('Invalid or expired token')
+        throw new Error(
+          'The password reset link has expired. Please use a new one.'
+        )
       }
       return user
     } catch (error: any) {

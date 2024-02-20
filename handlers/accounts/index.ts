@@ -69,7 +69,9 @@ export class Accounts {
         await AccountService.updatePassword(user.email, newPassword)
         res.status(200).json({ message: 'Password reset successfully.' })
       } else {
-        res.status(400).json({ error: 'Invalid or expired token.' })
+        res.status(400).json({
+          error: 'The password reset link has expired. Please use a new one.',
+        })
       }
     } catch (error: any) {
       console.log('error is', error)

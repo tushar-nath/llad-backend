@@ -37,13 +37,13 @@ export class AccountService {
       await clientPromise
       const checkUser: any = await Account.findOne({ email: email })
       if (checkUser === null) {
-        throw new Error('User does not exist')
+        throw new Error('Email not found, please create an account.')
       }
-      const match: any = bcrypt.compare(password, checkUser.password)
+      const match: any = await bcrypt.compare(password, checkUser.password)
       if (match) {
         return checkUser
       } else {
-        throw new Error('Incorrect password')
+        throw new Error('Incorrect password, please check and try again')
       }
     } catch (error: any) {
       console.error('Error: ', error)

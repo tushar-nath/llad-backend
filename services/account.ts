@@ -166,10 +166,9 @@ export class AccountService {
   static async updateProfilePicture(userId: string, profilePicture: any) {
     try {
       await clientPromise
-      const pictureBuffer = Buffer.from(profilePicture, 'base64')
       const updatedUser = await Account.findByIdAndUpdate(
         userId,
-        { profilePicture: pictureBuffer },
+        { profilePicture: profilePicture },
         { new: true }
       )
       return updatedUser

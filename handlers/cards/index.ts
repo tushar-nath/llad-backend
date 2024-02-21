@@ -94,4 +94,15 @@ export class Cards {
       res.status(400).json({ error: error.message })
     }
   }
+
+  static async deleteCard(req: Request, res: Response) {
+    try {
+      const { cardId, userId } = req.body
+      await CardService.deleteCard(cardId, userId)
+      res.status(200).json({ message: 'Card deleted successfully' })
+    } catch (error: any) {
+      console.log('error is', error)
+      res.status(400).json({ error: error.message })
+    }
+  }
 }

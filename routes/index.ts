@@ -56,4 +56,5 @@ v1Router.get('/get-cards/:userId', Cards.getCards)
 v1Router.patch('/update-card', Cards.updateCard)
 v1Router.put('/revision', Cards.practiseCard)
 v1Router.post('/star-card', Cards.starCard)
+v1Router.delete('/delete-card', Cards.deleteCard)
 /*** Card Routes ***/

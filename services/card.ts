@@ -130,4 +130,22 @@ export class CardService {
       throw error
     }
   }
+
+  static async deleteCard(cardId: string, userId: string) {
+    try {
+      await clientPromise
+      const card = await Card.findById(cardId)
+      if (!card) {
+        throw new Error('Card not found')
+      }
+      if (card.userId.toString() !== userId) {
+        throw new Error('You are not authorized to delete this card')
+      }
+      await card.deleteOne()
+      return
+    } catch (error: any) {
+      console.error('Error: ', error)
+      throw error
+    }
+  }
 }
